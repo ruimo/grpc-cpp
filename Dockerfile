@@ -21,4 +21,24 @@ RUN \
   sh cmake-linux.sh -- --skip-license --prefix=$GRPC_DIR && \
   rm cmake-linux.sh
 
+RUN \
+  git clone --recurse-submodules -b v1.38.0 https://github.com/grpc/grpc && \
+  cd grpc && \
+  mkdir -p cmake/build && \
+  cd cmake/build && \
+  cmake -DgRPC_INSTALL=ON \
+      -DgRPC_BUILD_TESTS=OFF \
+      -DCMAKE_INSTALL_PREFIX=$GRPC_DIR \
+      ../.. && \
+  make -j 1 && \
+  make install && \
+  cd ../.. && \
+  mkdir -p third_party/abseil-cpp/cmake/build && \
+  cd third_party/abseil-cpp/cmake/build && \
+  cmake -DCMAKE_INSTALL_PREFIX=$GRPC_DIR \
+      -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE \
+      ../.. && \
+  make -j 1 && \
+  make install
+
 CMD /bin/bash
