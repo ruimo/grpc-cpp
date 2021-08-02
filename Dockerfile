@@ -6,7 +6,7 @@ ENV PATH $GRPC_DIR/bin:$PATH
 
 RUN \
   apt-get update -y && \
-  apt-get install locales tzdata -y
+  apt-get install locales tzdata iputils-ping net-tools -y
 
 RUN locale-gen ja_JP.UTF-8
 ENV LC_ALL ja_JP.UTF-8
