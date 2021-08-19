@@ -18,6 +18,10 @@ RUN \
   apt-get update -y && \
   apt-get install docker-ce docker-ce-cli containerd.io -y
 
+RUN \
+  curl -fsSL https://clis.cloud.ibm.com/install/linux | sh && \
+  bx plugin install container-registry
+
 RUN locale-gen ja_JP.UTF-8
 ENV LC_ALL ja_JP.UTF-8
 ENV TZ=Asia/Tokyo 
