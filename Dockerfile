@@ -6,7 +6,8 @@ ENV PATH $GRPC_DIR/bin:$PATH
 
 RUN \
   apt-get update -y && \
-  apt-get install locales tzdata iputils-ping net-tools apt-transport-https ca-certificates curl gnupg lsb-release -y
+  apt-get install locales tzdata iputils-ping net-tools apt-transport-https \
+    ca-certificates curl gnupg lsb-release git-lfs -y
 
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
